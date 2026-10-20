@@ -1,0 +1,15 @@
+# Dependencies, generated output, caches, and local secrets.
+**/node_modules/
+**/dist/
+**/test-results/
+**/playwright-report/
+**/.openai/
+**/.netlify/
+**/.asset-cache/
+**/.env
+**/.env.*
+!**/.env.example
+*.tar.gz
+*.zip
+.DS_Store
+Thumbs.db

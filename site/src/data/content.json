@@ -1,0 +1,290 @@
+{
+  "company": {
+    "email": "info@cultureexteriors.com",
+    "intro": "Culture Exteriors helps homeowners improve their homes with siding, roofing, windows, and gutters. Start with the part that needs attention, or bring several exterior improvements into one conversation.",
+    "about": "Your project may start with worn siding, an aging roof, windows that are difficult to use, or water collecting where it shouldn’t. Culture Exteriors focuses on residential exterior improvements in Ohio. Tell us what you’re seeing, what you want to change, and where your home is located.",
+    "serviceAreas": ["Ohio"]
+  },
+  "heroVideo": {
+    "desktop": "",
+    "mobile": "",
+    "description": "Approved drone footage of a home, pulling back and rising to reveal its neighborhood."
+  },
+  "estimateEndpoint": "",
+  "reviews": [],
+  "credentials": [],
+  "warranties": [],
+  "financing": null,
+  "beforeAfter": null,
+  "process": [
+    [
+      "Consultation",
+      "Talk through your priorities, your home, and the details you’d like to change."
+    ],
+    [
+      "Options & estimate",
+      "Compare suitable materials and review a clear scope before making a decision."
+    ],
+    [
+      "Installation",
+      "Confirm scheduling, site preparation, and installation details for your project."
+    ],
+    [
+      "Final walkthrough",
+      "Review the finished details, care guidance, and any remaining questions."
+    ]
+  ],
+  "services": {
+    "siding": {
+      "title": "Siding",
+      "headline": "Siding that suits\nthe house.",
+      "intro": "Compare vinyl, fiber cement, and engineered wood. Then choose a profile, trim, and finish that work with your home’s proportions.",
+      "short": "Materials, profiles, trim & finish.",
+      "alt": "Blue lap siding with white window casings and a porch soffit, photographed by Franco Debartolo",
+      "materials": [
+        [
+          "Vinyl & insulated vinyl",
+          "Versatile colors and woodgrain textures; insulated versions add a foam backing.",
+          "Periodic washing; generally does not need repainting. Follow product care guidance."
+        ],
+        [
+          "Fiber cement",
+          "Crisp edges and a substantial appearance, with smooth or textured finishes.",
+          "Inspect joints and coatings; factory or field finishes may need renewal over time."
+        ],
+        [
+          "Engineered wood",
+          "Wood-based texture with a traditional, warm appearance.",
+          "Maintain coatings, sealed cut edges, joints, and required ground clearances."
+        ]
+      ],
+      "detailTitle": "Material is one choice. Profile is another.",
+      "details": [
+        [
+          "Horizontal lap",
+          "Overlapping horizontal courses create a timeless rhythm. Dutch lap adds a shaped shadow line where the chosen material supports it."
+        ],
+        [
+          "Board-and-batten",
+          "Vertical panels or boards with raised battens emphasize height and clean architectural lines."
+        ],
+        [
+          "Shake & shingle",
+          "Smaller repeated shapes add texture to gables or a whole facade. Available looks vary by material."
+        ],
+        [
+          "Trim, soffit & fascia",
+          "Trim frames edges and openings. Soffit finishes the underside of eaves; fascia finishes the roof edge. Coordinate ventilation and water-management details."
+        ]
+      ],
+      "faqs": [
+        [
+          "Which siding needs the least maintenance?",
+          "Vinyl generally avoids a repainting cycle, while coated fiber cement and engineered wood require finish care. Exposure, detailing, and product instructions affect upkeep."
+        ],
+        [
+          "Can I mix siding profiles?",
+          "Yes, in a suitable design. Pairing lap siding with a board-and-batten or shingle accent can define architectural features. Confirm compatible products and installation details."
+        ],
+        [
+          "Does new siding fix moisture problems?",
+          "Cladding alone may not resolve leaks. Ask for assessment of flashing, drainage, weather barriers, and any damaged underlying materials."
+        ]
+      ],
+      "sources": [
+        ["CertainTeed: vinyl siding", "https://www.certainteed.com/siding/vinyl"],
+        ["James Hardie: fiber cement", "https://www.jameshardie.com/"],
+        ["LP: engineered wood lap siding", "https://www.lpcorp.com/products/siding-trim/lap-siding"]
+      ]
+    },
+    "roofing": {
+      "title": "Roofing",
+      "headline": "Start with\na sound roof.",
+      "intro": "Explore asphalt shingles and standing-seam metal, alongside the flashing, ventilation, and drainage details a roof needs.",
+      "short": "Shingles, metal & roof detailing.",
+      "alt": "A complete asphalt-shingle roof with gables, chimney flashing and white eaves, photographed by Roger Starnes Sr.",
+      "materials": [
+        [
+          "Architectural asphalt shingles",
+          "Layered dimensions and familiar residential character.",
+          "Check for damaged or missing shingles and keep roof drainage clear."
+        ],
+        [
+          "Designer & impact-resistant shingles",
+          "Distinctive shapes and textures; impact-rated options vary by product.",
+          "Review tested ratings and care requirements. Impact resistance does not mean damage-proof."
+        ],
+        [
+          "Standing-seam metal",
+          "Long, clean panels and raised seams give a precise architectural rhythm.",
+          "Inspect fasteners, coatings, sealants, and transitions according to the manufacturer."
+        ],
+        [
+          "Low-slope systems",
+          "EPDM, TPO, or modified bitumen may suit low-slope areas; system choice depends on the roof.",
+          "Inspect drainage and seams. Ask about low-slope work for your particular roof."
+        ]
+      ],
+      "detailTitle": "Think beyond the surface.",
+      "details": [
+        [
+          "Replacement planning",
+          "Discuss existing layers, decking condition, disposal, weather protection, and the proposed assembly. Ask what is included in your replacement estimate."
+        ],
+        [
+          "Repair & inspections",
+          "Describe leaks or visible damage when you inquire. Ask about assessment and repair availability for your roof."
+        ],
+        [
+          "Flashing & ventilation",
+          "Roof-to-wall transitions, penetrations, and valleys need careful detailing. Intake and exhaust ventilation should be evaluated as a system."
+        ]
+      ],
+      "faqs": [
+        [
+          "Should I repair or replace my roof?",
+          "Age alone is not enough to decide. The condition of the covering, decking, flashing, and extent of damage inform a recommendation. Include photos and the history of the issue when you inquire."
+        ],
+        [
+          "Can metal roofing suit a traditional home?",
+          "Standing-seam metal can complement both traditional and contemporary architecture. Panel proportions, color, roof pitch, and local requirements matter."
+        ],
+        [
+          "What about a porch or low-slope addition?",
+          "Low-slope roofs need an appropriate assembly. Ask whether EPDM, TPO, or modified bitumen is within the company’s confirmed capabilities."
+        ]
+      ],
+      "sources": [
+        [
+          "Owens Corning: types of shingles",
+          "https://www.owenscorning.com/en-us/roofing/blog/types-of-roofing-shingles"
+        ]
+      ]
+    },
+    "windows": {
+      "title": "Windows",
+      "headline": "Choose the window.\nConsider the room.",
+      "intro": "Compare operating styles, frame materials, and glass. Think about ventilation, cleaning access, and how each opening fits the facade.",
+      "short": "Operating styles, frames & glass.",
+      "alt": "White-framed casement windows overlooking a garden, photographed by Rob Wingate",
+      "materials": [
+        [
+          "Vinyl frames",
+          "A versatile appearance with a range of product-specific color choices.",
+          "Clean tracks and drainage paths; typically no painting is needed."
+        ],
+        [
+          "Wood & clad wood",
+          "Warm interior character; exterior cladding options depend on the product.",
+          "Wood finishes require care. Inspect exterior joints and cladding details."
+        ],
+        [
+          "Fiberglass & composites",
+          "Slender or substantial profiles depending on the system; material formulations vary.",
+          "Follow finish-care instructions and maintain hardware and seals."
+        ],
+        [
+          "Aluminum",
+          "Often associated with slim profiles and modern architecture.",
+          "Consider thermal-break design, condensation risk, and climate-specific ratings."
+        ]
+      ],
+      "detailTitle": "Choose how your windows work.",
+      "details": [
+        [
+          "Double-hung & single-hung",
+          "Double-hung windows have two operable sashes; single-hung windows typically open at the lower sash. Tilt features depend on the model."
+        ],
+        [
+          "Casement & awning",
+          "Casements hinge at the side; awning windows hinge at the top. Both open outward, so consider walkways and exterior clearance."
+        ],
+        [
+          "Sliding & picture",
+          "Sliding windows move horizontally. Fixed picture windows frame a view without an operable sash for ventilation."
+        ],
+        [
+          "Bay & bow",
+          "Bay windows typically combine angled sections; bow windows create a gentler curve. Structural support and the opening need evaluation."
+        ],
+        [
+          "Glass & climate",
+          "Low-E coatings manage heat transfer. Double glazing uses two panes; triple glazing uses three. Compare whole-window U-factor, solar heat gain coefficient, air leakage, and climate-appropriate ratings rather than pane count alone."
+        ]
+      ],
+      "faqs": [
+        [
+          "Will triple glazing always be the best choice?",
+          "Not automatically. Consider climate, orientation, whole-window ratings, frame design, noise priorities, weight, and price. There is no universal energy-savings promise."
+        ],
+        [
+          "Is window style the same as frame material?",
+          "No. Style describes how the window operates or its shape. Vinyl, wood, fiberglass, composite, and aluminum describe frame materials; combinations vary by product."
+        ],
+        [
+          "Can I change the size of an opening?",
+          "Changing an opening can involve structural work, exterior detailing, and permits. Ask whether this work is within the company’s confirmed scope."
+        ]
+      ],
+      "sources": [
+        [
+          "Andersen: compare windows",
+          "https://www.andersenwindows.com/windows-and-doors/windows/compare"
+        ]
+      ]
+    },
+    "gutters": {
+      "title": "Gutters",
+      "headline": "Give rain\na clear route.",
+      "intro": "Plan the gutter profile, downspouts, and discharge points together. Capacity and placement matter as much as the finish.",
+      "short": "Profiles, downspouts & drainage.",
+      "alt": "White gutter, fascia and downspout against blue lap siding, photographed by Zachary Keimig",
+      "materials": [
+        [
+          "Seamless aluminum",
+          "Continuous runs formed for the home, with seams still needed at corners and outlets.",
+          "Clean debris and inspect joints, hangers, outlets, and finishes."
+        ],
+        [
+          "Other material choices",
+          "Steel, copper, and other materials create different visual effects and care needs.",
+          "Discuss corrosion compatibility, finish, and installation requirements."
+        ]
+      ],
+      "detailTitle": "One system. Every detail connected.",
+      "details": [
+        [
+          "K-style & half-round",
+          "These describe profiles, not materials. K-style has a shaped face; half-round has a curved trough. Match the profile to your home’s architecture."
+        ],
+        [
+          "Sizing & downspouts",
+          "Gutter and downspout capacity depends on contributing roof area, roof layout, pitch, and local rainfall. Size the whole drainage path together."
+        ],
+        [
+          "Guards & maintenance",
+          "Guards can limit some debris, but do not eliminate maintenance. Tree cover, roof debris, product design, and safe cleaning access matter."
+        ],
+        [
+          "Drainage & color",
+          "Coordinate the gutter finish with fascia, siding, and trim. Plan discharge away from vulnerable areas and verify local drainage requirements."
+        ]
+      ],
+      "faqs": [
+        [
+          "Are seamless gutters completely seamless?",
+          "Long runs can be formed continuously, but corners, end caps, and downspout outlets still create connections that need inspection."
+        ],
+        [
+          "Do gutter guards mean I never have to clean?",
+          "No. Debris can accumulate on or around guards. Inspection and cleaning are still necessary; frequency depends on the home and surroundings."
+        ],
+        [
+          "What size gutters does my home need?",
+          "Sizing depends on roof area, rainfall intensity, roof geometry, and outlet layout. A site-specific assessment is more useful than a one-size-fits-all recommendation."
+        ]
+      ],
+      "sources": [["Englert: gutter systems", "https://www.englertinc.com/gutters"]]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "eaves-1200.webp": [1200, 900],
+  "eaves-640.webp": [640, 480],
+  "gutter-maintenance-1200.webp": [1200, 800],
+  "gutter-maintenance-640.webp": [640, 426],
+  "gutters-1200.webp": [1200, 1600],
+  "gutters-640.webp": [640, 853],
+  "hero-1920.webp": [1920, 1063],
+  "hero-960.webp": [960, 532],
+  "roof-texture-1200.webp": [1200, 800],
+  "roof-texture-640.webp": [640, 427],
+  "roofing-1200.webp": [1200, 1108],
+  "roofing-640.webp": [640, 591],
+  "siding-1200.webp": [1200, 1800],
+  "siding-640.webp": [640, 960],
+  "windows-1200.webp": [1200, 1001],
+  "windows-640.webp": [640, 534]
+}

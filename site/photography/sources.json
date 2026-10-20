@@ -1,0 +1,95 @@
+{
+  "license": "https://unsplash.com/license",
+  "licenseChecked": "2026-10-19",
+  "territory": "Ohio is confirmed by the owner. Stock images are architectural references, not identified Ohio properties or Culture Exteriors projects.",
+  "selected": [
+    {
+      "photographer": "Roger Starnes Sr.",
+      "page": "https://unsplash.com/photos/E4oSaNDs0VE",
+      "image": "https://images.unsplash.com/photo-1773427621086-1f8511c78e39",
+      "uses": ["hero"],
+      "reason": "Believable suburban home with natural landscaping, asphalt roof and siding; broad facade survives desktop and mobile crops."
+    },
+    {
+      "photographer": "Franco Debartolo",
+      "page": "https://unsplash.com/photos/3PScsGdblRw",
+      "image": "https://images.unsplash.com/photo-1773101883541-42a4881daef3",
+      "uses": ["siding"],
+      "reason": "Lap siding, white window casings, and soffit detail. Used for siding only."
+    },
+    {
+      "photographer": "Sebastian Schuster",
+      "page": "https://unsplash.com/photos/UmaPovAS3Bc",
+      "image": "https://images.unsplash.com/photo-1775695161075-f286033564df",
+      "uses": ["eaves"],
+      "reason": "Clear roof-edge, soffit and fascia junction. Cool sky complements the blue siding without recoloring the source."
+    },
+    {
+      "photographer": "Hal Gatewood",
+      "page": "https://unsplash.com/photos/9u5r1XbtMJg",
+      "image": "https://images.unsplash.com/photo-1573876384005-dabc14a8ccbd",
+      "uses": ["roof-texture"],
+      "reason": "Natural close-up showing actual asphalt-shingle texture and overlap."
+    },
+    {
+      "photographer": "Jon Sailer",
+      "page": "https://unsplash.com/photos/fYwPrfAQcMo",
+      "image": "https://images.unsplash.com/photo-1665442348932-6e16d72fe163",
+      "uses": ["gutter-maintenance"],
+      "reason": "Seasonal gutter-maintenance detail with leaves, used only in maintenance content."
+    },
+    {
+      "photographer": "Roger Starnes Sr.",
+      "page": "https://unsplash.com/photos/JxGZFKPx5n0",
+      "image": "https://images.unsplash.com/photo-1780080019323-20a5fb128906",
+      "uses": ["roofing"],
+      "reason": "Complete residential roof with gables, chimney, fascia and gutters; realistic architecture compatible with Ohio homes. Not represented as an Ohio property. Visually inspected."
+    },
+    {
+      "photographer": "Rob Wingate",
+      "page": "https://unsplash.com/photos/Fd9tUmRBJzk",
+      "image": "https://images.unsplash.com/photo-1509644851169-2acc08aa25b5",
+      "uses": ["windows"],
+      "reason": "Window-focused interior photograph showing divided-light frames, operating hardware and a garden outlook. Visually inspected."
+    },
+    {
+      "photographer": "Zachary Keimig",
+      "page": "https://unsplash.com/photos/a-blue-house-with-a-red-brick-chimney-gvt-wjGk4S4",
+      "image": "https://images.unsplash.com/photo-1569898773055-2f2b6e97e1ed",
+      "uses": ["gutters"],
+      "reason": "Clean white gutter, fascia and downspout against blue lap siding. Visually inspected; not company work."
+    }
+  ],
+  "rejected": [
+    {
+      "photographer": "Luke Southern",
+      "page": "https://unsplash.com/photos/ZzZouwiQWV0",
+      "reason": "Water spilling from the roof edge is a poor lead image for planned gutter improvements. Inspected but not used."
+    },
+    {
+      "photographer": "Russ White",
+      "page": "https://unsplash.com/photos/AaL7hGBRkhc",
+      "reason": "Aged improvised drainage beside a doorway is unsuitable for leading gutter imagery."
+    },
+    {
+      "photographer": "Jay van Santen",
+      "page": "https://unsplash.com/photos/QdBETwBOUjU",
+      "reason": "Sticker-covered downspout is irrelevant to residential renovation presentation."
+    },
+    {
+      "photographer": "Taylor Hammersla",
+      "page": "https://unsplash.com/photos/6QYiR0utkvA",
+      "reason": "Real drainpipe photograph, but the stucco architecture is less coherent with the selected house set."
+    }
+  ],
+  "video": {
+    "status": "No approved footage selected",
+    "brief": "Close view of a believable residence, slowly pulling back and ascending to reveal the neighborhood; naturally graded, smooth loop, no people identifiable without releases.",
+    "researched": [
+      "https://www.pexels.com/video/aerial-view-of-suburban-neighborhood-with-modern-homes-34835749/",
+      "https://www.pexels.com/video/aerial-view-of-suburban-neighborhood-houses-34648677/",
+      "https://www.pexels.com/video/aerial-view-of-suburban-neighborhood-at-dusk-36242360/"
+    ],
+    "reason": "Candidate descriptions do not establish the required camera movement and regional fit. No unverified video was deployed."
+  }
+}
