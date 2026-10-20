@@ -13,7 +13,7 @@ export const generalFaqs = [
   ],
   [
     'Do you serve my area?',
-    'Culture Exteriors serves Ohio. Send your city and ZIP code to check availability for your specific location and project.',
+    'Culture Homes & Exteriors serves Ohio. Send your city and ZIP code to check availability for your specific location and project.',
   ],
   [
     'How much will my project cost?',

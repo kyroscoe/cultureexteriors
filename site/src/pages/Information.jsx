@@ -20,8 +20,8 @@ export function Inspiration() {
 export function About() {
   return (
     <PageLayout
-      title="About Culture Exteriors"
-      headline="Culture Exteriors "
+      title="About Culture Homes & Exteriors"
+      headline="Culture Homes & Exteriors "
       intro={content.company.intro}
     >
       <div className="split">
@@ -75,7 +75,7 @@ export function ServiceArea() {
           <h2>Exterior improvements.</h2>
           <p>
             {areas.length
-              ? `Culture Exteriors serves homeowners in ${areas.join(', ')}. Send your city and ZIP code to check availability for your project.`
+              ? `Culture Homes & Exteriors serves homeowners in ${areas.join(', ')}. Send your city and ZIP code to check availability for your project.`
               : 'Send your city and ZIP code to check availability for your home.'}
           </p>
           <p>Send your city, ZIP code, and a brief description of the work you need.</p>
@@ -102,8 +102,8 @@ export function Privacy() {
         <h2>Information you choose to share.</h2>
         <p>
           When you submit the estimate form, your contact details, location, selected services, and
-          project description are sent to Culture Exteriors through Netlify Forms. Netlify processes
-          and stores submissions to handle your inquiry and filter spam.
+          project description are sent to Culture Homes & Exteriors through Netlify Forms. Netlify
+          processes and stores submissions to handle your inquiry and filter spam.
         </p>
         <p>
           We use the information you share to respond to your project inquiry. Please avoid sending

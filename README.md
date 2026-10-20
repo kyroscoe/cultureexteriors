@@ -1,4 +1,4 @@
-# Culture Exteriors
+# Culture Homes & Exteriors
 
 A React + Vite website using JavaScript, JSX and plain CSS. The existing design,
 logo, Ohio service content, larger text and interactions are retained. No Python

@@ -7,7 +7,7 @@ export default function Contact() {
     <PageLayout
       title="Request an Estimate"
       headline="Tell us about the work."
-      intro="Tell Culture Exteriors about your Ohio home and the exterior work you have in mind."
+      intro="Tell Culture Homes & Exteriors about your Ohio home and the exterior work you have in mind."
       cta={false}
     >
       <div className="contact-layout">

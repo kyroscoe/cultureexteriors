@@ -10,7 +10,7 @@ export default function Home() {
       <section className="editorial-hero">
         <div className="wrap hero-heading">
           <div>
-            <span className="eyebrow">Culture Exteriors</span>
+            <span className="eyebrow">Culture Homes & Exteriors</span>
             <h1>
               Built to Protect.
               <br />
@@ -43,7 +43,7 @@ export default function Home() {
               same plan.
             </p>
             <a className="text-link" href="/about/">
-              About Culture Exteriors ↗
+              About Culture Homes & Exteriors ↗
             </a>
           </div>
           <div className="service-links">
@@ -55,7 +55,7 @@ export default function Home() {
               </a>
             ))}
             <p className="note">
-              Materials and project scope are confirmed directly with Culture Exteriors.
+              Materials and project scope are confirmed directly with Culture Homes & Exteriors.
             </p>
           </div>
         </div>

@@ -30,7 +30,7 @@ export default function App({ pageKey = 'home' }) {
   const Page = informationPages[pageKey];
   useEffect(() => {
     document.body.className = `page-${pageKey}`;
-    document.title = `${pages[pageKey].title} | Culture Exteriors`;
+    document.title = `${pages[pageKey].title} | Culture Homes & Exteriors`;
     function keepFocusVisible(event) {
       const target = event.target;
       if (!target.closest?.('main')) return;

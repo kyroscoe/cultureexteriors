@@ -4,7 +4,7 @@ export const pages = {
   home: {
     title: 'Ohio Siding, Roofing, Windows & Gutters',
     description:
-      'Culture Exteriors helps Ohio homeowners with siding, roofing, windows, and gutters. Explore materials and request an estimate for your home.',
+      'Culture Homes & Exteriors helps Ohio homeowners with siding, roofing, windows, and gutters. Explore materials and request an estimate for your home.',
   },
   ...Object.fromEntries(
     Object.entries(content.services).map(([key, service]) => [
@@ -16,7 +16,7 @@ export const pages = {
     title: 'Exterior Inspiration',
     description: 'Browse siding, roofing, window, and gutter details for your own home.',
   },
-  about: { title: 'About Culture Exteriors', description: content.company.intro },
+  about: { title: 'About Culture Homes & Exteriors', description: content.company.intro },
   faqs: {
     title: 'Frequently Asked Questions',
     description: 'Useful answers as you consider an exterior improvement.',
@@ -29,18 +29,18 @@ export const pages = {
   contact: {
     title: 'Request an Estimate',
     description:
-      'Tell Culture Exteriors about your Ohio home and the exterior work you have in mind.',
+      'Tell Culture Homes & Exteriors about your Ohio home and the exterior work you have in mind.',
   },
   privacy: { title: 'Privacy', description: 'A short notice for estimate inquiries.' },
   photography: {
     title: 'Photography Credits',
     description:
-      'The photographs on this site are stock reference images, not Culture Exteriors projects.',
+      'The photographs on this site are stock reference images, not Culture Homes & Exteriors projects.',
   },
   404: {
     title: 'Page Not Found',
     description:
-      'The page you requested could not be found. Return to Culture Exteriors or contact us about your home.',
+      'The page you requested could not be found. Return to Culture Homes & Exteriors or contact us about your home.',
   },
 };
 

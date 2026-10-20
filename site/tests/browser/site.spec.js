@@ -21,7 +21,7 @@ test('all pages hydrate, navigation works, and layouts fit the viewport', async 
   for (const [key, metadata] of Object.entries(pages)) {
     const response = await page.goto(pagePath(key));
     expect(response.status()).toBe(200);
-    await expect(page).toHaveTitle(`${metadata.title} | Culture Exteriors`);
+    await expect(page).toHaveTitle(`${metadata.title} | Culture Homes & Exteriors`);
     await expect(page.locator('main h1')).toBeVisible();
     await loadPhotographs(page);
     if (['siding', 'roofing', 'windows', 'gutters'].includes(key)) {

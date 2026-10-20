@@ -67,7 +67,7 @@ export function CallToAction() {
 
 export function Logo({ lazy = false }) {
   return (
-    <a className="logo" href="/" aria-label="Culture Exteriors home">
+    <a className="logo" href="/" aria-label="Culture Homes & Exteriors home">
       <img
         src="/assets/culture-logo.jpeg"
         width="898"
@@ -97,7 +97,7 @@ export function Footer() {
             ))}
           </div>
           <div>
-            <h3>Culture Exteriors</h3>
+            <h3>Culture Homes & Exteriors</h3>
             <a href="/about/">About us</a>
             <a href="/our-work/">Exterior Inspiration</a>
             <a href="/faqs/">FAQs</a>
@@ -110,7 +110,7 @@ export function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 Culture Exteriors</span>
+          <span>© 2026 Culture Homes & Exteriors</span>
           <a href="/privacy/">Privacy</a>
         </div>
       </div>
@@ -126,7 +126,7 @@ export function PageLayout({ title, headline, intro, children, cta = true }) {
           <div className="breadcrumb">
             <a href="/">Home</a> / {title}
           </div>
-          <span className="eyebrow">Culture Exteriors</span>
+          <span className="eyebrow">Culture Homes & Exteriors</span>
           <h1>{headline}</h1>
           <p>{intro}</p>
         </div>

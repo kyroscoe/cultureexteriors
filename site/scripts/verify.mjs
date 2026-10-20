@@ -26,7 +26,7 @@ for (const [key, metadata] of Object.entries(pages)) {
     document.querySelector('meta[charset]').getAttribute('charset').toLowerCase(),
     'utf-8',
   );
-  assert.equal(document.title, `${metadata.title} | Culture Exteriors`);
+  assert.equal(document.title, `${metadata.title} | Culture Homes & Exteriors`);
   assert(!titles.has(document.title), `${path}: unique title`);
   titles.add(document.title);
   const description = document.querySelector('meta[name="description"]').content;

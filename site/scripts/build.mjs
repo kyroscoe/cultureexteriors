@@ -29,7 +29,7 @@ if (!template.includes('<!--app-html-->') || !template.includes('<!--page-head--
 const business = {
   '@context': 'https://schema.org',
   '@type': 'HomeAndConstructionBusiness',
-  name: 'Culture Exteriors',
+  name: 'Culture Homes & Exteriors',
   url: origin,
   email: 'info@cultureexteriors.com',
   areaServed: { '@type': 'State', name: 'Ohio' },
@@ -49,7 +49,7 @@ try {
   const { render, renderFormDefinition } = await server.ssrLoadModule('/src/entry-server.jsx');
   for (const [key, metadata] of Object.entries(pages)) {
     const path = pagePath(key);
-    const title = escape(`${metadata.title} | Culture Exteriors`);
+    const title = escape(`${metadata.title} | Culture Homes & Exteriors`);
     const description = escape(metadata.description);
     const canonical = escape(`${origin}${path}`);
     const head = `

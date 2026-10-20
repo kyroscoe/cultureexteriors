@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Culture Exteriors residential exterior website",
+  "description": "Culture Homes & Exteriors residential exterior website",
   "engines": {
     "node": ">=22 <23"
   },
