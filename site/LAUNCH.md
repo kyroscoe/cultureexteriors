@@ -6,13 +6,18 @@ The React + Vite source is in `site/src/`. Node generates pre-rendered pages plu
 
 ## Contact delivery
 
-The current form prepares a draft for the visitor to review and send. It does not send automatically. The direct address remains info@cultureexteriors.com; its disclosure and privacy notice match this behavior.
+The estimate form submits directly to Netlify Forms. The built contact page contains a hidden `estimate` form outside React's root, with the same fields as the visible form. This lets Netlify detect the form without altering React's hydrated markup. Requests are URL-encoded, include `form-name=estimate`, retain multiple `services[]` values, and include the `website` honeypot. The `email` field supplies the submitter's reply-to address.
 
-Choose Netlify Forms or a same-origin Netlify Function plus an email provider before enabling online delivery. Netlify Forms needs form detection, the appropriate HTML/encoding and response handler, spam protection, and a submission notification to info@cultureexteriors.com. A function needs server-held provider credentials, a verified sender, server validation, fixed recipient, rate limits and bot protection.
+Owner setup in Netlify:
 
-Neither integration is enabled by this cleanup. The current optional endpoint expects JSON `{ "accepted": true }`; Netlify Forms uses a different contract and must not be enabled merely by setting `estimateEndpoint`. Update form copy and privacy notices with the integration. Test with mocks/sandbox first, then verify real notification/delivery configuration before advertising automatic submission. Never put credentials in browser code or public content.
+1. Keep form detection enabled, then deploy this commit.
+2. Confirm `estimate` appears under **Forms**.
+3. Under **Forms > Submission notifications**, add an email notification to **info@cultureexteriors.com** for the `estimate` form. Enabling detection alone does not configure email notifications.
+4. Submit an owner-approved test on the live site. Confirm it appears in Netlify and that the notification arrives. Check Spam submissions if it is filtered.
 
-References: [Netlify Forms](https://docs.netlify.com/manage/forms/setup/), [spam filters](https://docs.netlify.com/manage/forms/spam-filters/).
+The page shows success only after a successful Netlify HTTP response. Failed requests keep the visitor's details. No email-delivery guarantee is made: receipt by Netlify and email notification delivery are separate. The direct email link remains available. Vite development and preview servers reject submissions with HTTP 501; automated tests mock Netlify acceptance and do not send real inquiries. Native form submission is also available without JavaScript, with browser validation and Netlify's default success page.
+
+References: [Netlify Forms](https://docs.netlify.com/manage/forms/setup/), [notifications](https://docs.netlify.com/manage/forms/notifications/), [spam filters](https://docs.netlify.com/manage/forms/spam-filters/).
 
 ## Domain and final review
 

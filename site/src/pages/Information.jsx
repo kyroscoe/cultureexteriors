@@ -101,14 +101,13 @@ export function Privacy() {
       <div style={{ maxWidth: 750 }}>
         <h2>Information you choose to share.</h2>
         <p>
-          The current form does not send information to a server. It can prepare a draft in your own
-          email application, which you review and send. Your email provider handles that message
-          under its own terms.
+          When you submit the estimate form, your contact details, location, selected services, and
+          project description are sent to Culture Exteriors through Netlify Forms. Netlify processes
+          and stores submissions to handle your inquiry and filter spam.
         </p>
         <p>
-          Use your name, contact details, location, and project description only to request a
-          response about your project. Please avoid sending sensitive personal or financial
-          information. No marketing consent is required.
+          We use the information you share to respond to your project inquiry. Please avoid sending
+          sensitive personal or financial information. No marketing consent is required.
         </p>
         <p>
           No advertising trackers or analytics have been added. Google Fonts may receive routine
@@ -117,8 +116,7 @@ export function Privacy() {
         </p>
         <p>
           Contact <a href={`mailto:${content.company.email}`}>{content.company.email}</a> with
-          privacy questions. This notice must be updated if server-side delivery or other data
-          processing is enabled.
+          privacy questions or requests about the information you have submitted.
         </p>
       </div>
     </PageLayout>

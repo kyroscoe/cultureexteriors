@@ -86,20 +86,25 @@ describe('estimate form', () => {
     expect(screen.getByText('Please select at least one service.')).toBeVisible();
     expect(screen.getByRole('status')).toHaveTextContent('has not been sent');
   });
-  it('prepares a multi-service email draft without a network request or false success', async () => {
-    const fetch = vi.spyOn(globalThis, 'fetch');
+  it('posts a multi-service Netlify submission using the detected form name and URL encoding', async () => {
+    const fetch = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true, status: 200 });
     render(<EstimateForm />);
     fillForm();
-    fireEvent.click(screen.getByRole('button', { name: /Prepare Email/ }));
-    const draft = await screen.findByRole('link', { name: /Open your email draft/ });
-    expect(draft).toHaveAttribute(
-      'href',
-      expect.stringContaining('mailto:info@cultureexteriors.com'),
+    fireEvent.click(screen.getByRole('button', { name: /Send Estimate/ }));
+    await waitFor(() =>
+      expect(screen.getByRole('status')).toHaveTextContent('request has been received'),
     );
-    expect(decodeURIComponent(draft.href)).toContain('Services: Siding, Windows');
-    expect(draft).toHaveFocus();
-    expect(screen.getByRole('status')).toHaveTextContent('Nothing has been sent');
-    expect(fetch).not.toHaveBeenCalled();
+    expect(fetch).toHaveBeenCalledOnce();
+    const [url, request] = fetch.mock.calls[0];
+    expect(url).toBe('/');
+    expect(request.method).toBe('POST');
+    expect(request.headers['Content-Type']).toBe('application/x-www-form-urlencoded');
+    const sent = new URLSearchParams(request.body);
+    expect(sent.get('form-name')).toBe('estimate');
+    expect(sent.get('email')).toBe('homeowner@example.com');
+    expect(sent.getAll('services[]')).toEqual(['Siding', 'Windows']);
+    expect(sent.get('website')).toBe('');
+    expect(screen.getByRole('status')).toHaveFocus();
   });
   it('requires a phone number only when phone contact is selected', () => {
     render(<EstimateForm />);
@@ -116,10 +121,9 @@ describe('estimate form', () => {
     fillForm();
     fireEvent.change(screen.getByLabelText('Leave blank'), { target: { value: 'bot' } });
     fireEvent.submit(document.querySelector('form'));
-    expect(screen.getByRole('status')).toHaveTextContent('Unable to prepare');
-    expect(screen.queryByRole('link', { name: /Open your email draft/ })).not.toBeInTheDocument();
+    expect(screen.getByRole('status')).toHaveTextContent('Unable to send');
   });
-  it('shows loading and only succeeds after explicit delivery acceptance', async () => {
+  it('shows loading, prevents duplicate submissions, and only succeeds after Netlify responds', async () => {
     let accept;
     vi.spyOn(globalThis, 'fetch').mockImplementation(
       () =>
@@ -127,40 +131,35 @@ describe('estimate form', () => {
           accept = resolve;
         }),
     );
-    render(<EstimateForm endpoint="/api/estimate" />);
+    render(<EstimateForm />);
     fillForm();
     fireEvent.submit(document.querySelector('form'));
     expect(screen.getByRole('button', { name: /Please wait/ })).toBeDisabled();
     expect(document.querySelector('form')).toHaveAttribute('aria-busy', 'true');
-    accept({ ok: true, json: async () => ({ accepted: true }) });
+    fireEvent.submit(document.querySelector('form'));
+    expect(globalThis.fetch).toHaveBeenCalledOnce();
+    expect(screen.getByRole('status')).not.toHaveTextContent('has been received');
+    accept({ ok: true, status: 200 });
     await waitFor(() =>
-      expect(screen.getByRole('status')).toHaveTextContent('accepted your estimate request'),
+      expect(screen.getByRole('status')).toHaveTextContent('request has been received'),
     );
     expect(screen.getByRole('button', { name: /Send Estimate/ })).toBeEnabled();
     expect(screen.getByLabelText('Full name')).toHaveValue('');
   });
-  it.each(['rejected', 'network failure', 'invalid JSON'])(
+  it.each([400, 404, 429, 500, 501, 'network failure'])(
     'retains entered details on %s',
     async (failure) => {
       vi.spyOn(globalThis, 'fetch').mockImplementation(async () => {
         if (failure === 'network failure') throw new Error('offline');
-        return {
-          ok: failure === 'invalid JSON',
-          json: async () => {
-            if (failure === 'invalid JSON') throw new Error('invalid');
-            return { accepted: false };
-          },
-        };
+        return { ok: false, status: failure };
       });
-      render(<EstimateForm endpoint="/api/estimate" />);
+      render(<EstimateForm />);
       fillForm();
       fireEvent.submit(document.querySelector('form'));
       await waitFor(() => expect(screen.getByRole('status')).toHaveClass('error'));
       expect(screen.getByLabelText('Full name')).toHaveValue('Test Homeowner');
       expect(screen.getByRole('button', { name: /Send Estimate/ })).toBeEnabled();
-      expect(screen.getByRole('status')).not.toHaveTextContent(
-        'accepted your estimate request. Thank you',
-      );
+      expect(screen.getByRole('status')).not.toHaveTextContent('has been received');
     },
   );
 });

@@ -1,26 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import content from '../data/content.json';
-import { deliverEstimate, emailDraft, validateEstimate } from '../lib/estimate';
+import { deliverEstimate, ESTIMATE_FORM_NAME, validateEstimate } from '../lib/estimate';
 
-export default function EstimateForm({ endpoint = content.estimateEndpoint }) {
+export default function EstimateForm() {
   const [errors, setErrors] = useState({});
   const [method, setMethod] = useState('Email');
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState('');
   const [failed, setFailed] = useState(false);
-  const [draft, setDraft] = useState('');
-  const draftLink = useRef(null);
+  const [enhanced, setEnhanced] = useState(false);
+  const statusRef = useRef(null);
   const formRef = useRef(null);
   const submitting = useRef(false);
 
   useEffect(() => {
-    if (draft) draftLink.current.focus();
-  }, [draft]);
+    setEnhanced(true);
+  }, []);
   useEffect(() => {
     const first = Object.keys(errors)[0];
     if (first)
       formRef.current
-        .querySelector(first === 'services' ? '[name="services"]' : `#${first}`)
+        .querySelector(first === 'services' ? '[name="services[]"]' : `#${first}`)
         .focus();
   }, [errors]);
 
@@ -29,12 +29,11 @@ export default function EstimateForm({ endpoint = content.estimateEndpoint }) {
     if (submitting.current) return;
     const form = event.currentTarget;
     const data = new FormData(form);
-    setDraft('');
     setFailed(false);
     setStatus('');
     if (data.get('website')) {
       setFailed(true);
-      setStatus('Unable to prepare this request. Please email us directly.');
+      setStatus('Unable to send this request. Please email us directly.');
       return;
     }
     const nextErrors = validateEstimate(data);
@@ -46,19 +45,13 @@ export default function EstimateForm({ endpoint = content.estimateEndpoint }) {
     }
     submitting.current = true;
     setBusy(true);
-    setStatus(endpoint ? 'Sending your request…' : 'Preparing your request…');
+    setStatus('Sending your request…');
     try {
-      if (endpoint) {
-        await deliverEstimate(endpoint, data);
-        setStatus('The delivery service accepted your estimate request. Thank you.');
-        form.reset();
-        setMethod('Email');
-      } else {
-        setDraft(emailDraft(data, content.company.email));
-        setStatus(
-          'Your email draft is ready. Nothing has been sent. Open the draft below, then send it from your email app.',
-        );
-      }
+      await deliverEstimate(data);
+      setStatus('Your estimate request has been received. Thank you.');
+      form.reset();
+      setMethod('Email');
+      statusRef.current.focus();
     } catch (error) {
       setFailed(true);
       setStatus(error.message);
@@ -92,13 +85,17 @@ export default function EstimateForm({ endpoint = content.estimateEndpoint }) {
 
   return (
     <form
+      name={ESTIMATE_FORM_NAME}
+      method="POST"
+      action="/"
       className="form"
       id="estimate-form"
       ref={formRef}
-      noValidate
+      noValidate={enhanced}
       onSubmit={submit}
       aria-busy={busy || undefined}
     >
+      <input type="hidden" name="form-name" value={ESTIMATE_FORM_NAME} />
       <h3>Project details</h3>
       <p className="note">Fields are required unless marked optional.</p>
       <div className="trap" aria-hidden="true">
@@ -132,7 +129,7 @@ export default function EstimateForm({ endpoint = content.estimateEndpoint }) {
             <label key={service.title}>
               <input
                 type="checkbox"
-                name="services"
+                name="services[]"
                 value={service.title}
                 aria-invalid={index === 0 && errors.services ? true : undefined}
                 aria-describedby={index === 0 && errors.services ? 'service-error' : undefined}
@@ -179,33 +176,52 @@ export default function EstimateForm({ endpoint = content.estimateEndpoint }) {
         </select>
       </div>
       <p className="form-note">
-        Your details are for responding to your project inquiry. No marketing signup is required.{' '}
+        Your details are used to respond to your project inquiry. No marketing signup is required.{' '}
         <a href="/privacy/">Privacy notice</a>
       </p>
       <button className="btn" type="submit" id="submit-estimate" disabled={busy}>
-        {busy ? 'Please wait…' : endpoint ? 'Send Estimate Request' : 'Prepare Email Request'}{' '}
-        <span aria-hidden="true">↗</span>
+        {busy ? 'Please wait…' : 'Send Estimate Request'} <span aria-hidden="true">↗</span>
       </button>
       <div
         className={`status${failed ? ' error' : ''}`}
         role="status"
         aria-live="polite"
         id="form-status"
+        ref={statusRef}
         tabIndex="-1"
       >
         {status}
       </div>
-      {draft && (
-        <>
-          <a ref={draftLink} id="email-draft" className="text-link" href={draft}>
-            Open your email draft ↗
-          </a>
-          <p className="form-note" id="draft-help">
-            Review and send the draft in your email app. If it does not open, email
-            info@cultureexteriors.com directly. This website has not sent your request.
-          </p>
-        </>
-      )}
+    </form>
+  );
+}
+
+// Build-only HTML outside React's root: Netlify modifies this definition during
+// deployment, leaving the hydrated form's DOM unchanged. Keep field names in sync.
+export function NetlifyFormDefinition() {
+  return (
+    <form
+      name={ESTIMATE_FORM_NAME}
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="website"
+      hidden
+    >
+      <input type="hidden" name="form-name" value={ESTIMATE_FORM_NAME} />
+      <input name="name" />
+      <input type="email" name="email" />
+      <input name="phone" />
+      <input name="city" />
+      <input name="postal" />
+      {Object.values(content.services).map((service) => (
+        <input key={service.title} type="checkbox" name="services[]" value={service.title} />
+      ))}
+      <textarea name="description" />
+      <select name="method">
+        <option value="Email">Email</option>
+        <option value="Phone">Phone</option>
+      </select>
+      <input name="website" />
     </form>
   );
 }

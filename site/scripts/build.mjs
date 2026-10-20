@@ -46,7 +46,7 @@ const server = await createServer({
   appType: 'custom',
 });
 try {
-  const { render } = await server.ssrLoadModule('/src/entry-server.jsx');
+  const { render, renderFormDefinition } = await server.ssrLoadModule('/src/entry-server.jsx');
   for (const [key, metadata] of Object.entries(pages)) {
     const path = pagePath(key);
     const title = escape(`${metadata.title} | Culture Exteriors`);
@@ -67,6 +67,7 @@ try {
     const html = template
       .replace('<!--page-head-->', () => head)
       .replace('<!--app-html-->', () => render(key))
+      .replace('<!--netlify-form-->', () => (key === 'contact' ? renderFormDefinition() : ''))
       .replace('<div id="root">', '<div id="root" data-prerendered="true">')
       .replace('<body>', `<body class="page-${key}">`);
     const target =

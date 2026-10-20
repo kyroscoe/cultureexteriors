@@ -6,6 +6,7 @@ import { JSDOM } from 'jsdom';
 import { preview } from 'vite';
 import { pages, pagePath } from '../src/routes.js';
 import { shouldIndex, siteOrigin } from './settings.mjs';
+import { ESTIMATE_FORM_NAME } from '../src/lib/estimate.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = resolve(root, 'dist');
@@ -82,6 +83,30 @@ for (const [path, document] of documents) {
   }
 }
 
+// Both JavaScript and native submissions must use the same Netlify field schema.
+const contact = documents.get('/contact/');
+const definition = contact.querySelector('form[data-netlify="true"]');
+const liveForm = contact.querySelector('#estimate-form');
+assert(definition?.hidden, 'Netlify must detect a static form definition');
+assert(
+  !contact.querySelector('#root').contains(definition),
+  'Netlify must not modify the hydrated React root',
+);
+assert.equal(definition.getAttribute('name'), ESTIMATE_FORM_NAME);
+assert.equal(definition.getAttribute('netlify-honeypot'), 'website');
+assert.equal(liveForm.getAttribute('method'), 'POST');
+assert.equal(liveForm.getAttribute('action'), '/');
+assert.equal(liveForm.querySelector('[name="form-name"]').value, ESTIMATE_FORM_NAME);
+assert(!liveForm.hasAttribute('novalidate'), 'Native validation must work without JavaScript');
+const fields = (form) =>
+  new Set([...form.querySelectorAll('input, select, textarea')].map((field) => field.name));
+assert.deepEqual(
+  fields(definition),
+  fields(liveForm),
+  'Every submitted field must be detected by Netlify',
+);
+assert.equal(liveForm.querySelectorAll('[name="services[]"]').length, 4);
+
 const sitemap = new JSDOM(await readFile(resolve(output, 'sitemap.xml'), 'utf8'), {
   contentType: 'application/xml',
 }).window.document;
@@ -117,6 +142,15 @@ try {
   const missing = await fetch(`${address}/this-page-does-not-exist/`);
   assert.equal(missing.status, 404);
   assert((await missing.text()).includes('That page isn'));
+  const localSubmission = await fetch(`${address}/`, {
+    method: 'POST',
+    body: 'form-name=estimate',
+  });
+  assert.equal(
+    localSubmission.status,
+    501,
+    'Local previews must not simulate submission acceptance',
+  );
 } finally {
   await new Promise((done, reject) =>
     server.httpServer.close((error) => (error ? reject(error) : done())),

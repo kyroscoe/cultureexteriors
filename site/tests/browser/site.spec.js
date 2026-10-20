@@ -51,7 +51,7 @@ test('all pages hydrate, navigation works, and layouts fit the viewport', async 
   expect(errors).toEqual([]);
 });
 
-test('gallery filters, FAQs, contact validation and draft-only email work', async ({
+test('gallery filters, FAQs, contact validation and Netlify submission work', async ({
   page,
 }, testInfo) => {
   await page.goto('/');
@@ -87,7 +87,7 @@ test('gallery filters, FAQs, contact validation and draft-only email work', asyn
     fullPage: true,
     animations: 'disabled',
   });
-  await page.getByRole('button', { name: /Prepare Email Request/ }).click();
+  await page.getByRole('button', { name: /Send Estimate Request/ }).click();
   await expect(page.getByLabel('Full name')).toBeFocused();
   await expect(page.getByLabel('Email', { exact: true })).toHaveAttribute('aria-invalid', 'true');
   await page.getByLabel('Full name').fill('Preview Homeowner');
@@ -99,13 +99,37 @@ test('gallery filters, FAQs, contact validation and draft-only email work', asyn
   await page
     .getByLabel('Tell us about your project')
     .fill('Planning siding and window improvements.');
-  await page.getByRole('button', { name: /Prepare Email Request/ }).click();
-  await expect(page.getByRole('status')).toContainText('Nothing has been sent');
-  await expect(page.getByRole('link', { name: /Open your email draft/ })).toHaveAttribute(
-    'href',
-    /^mailto:info@cultureexteriors.com/,
-  );
-  await expect(page.getByRole('link', { name: /Open your email draft/ })).toBeFocused();
+  await page.route(`${new URL(page.url()).origin}/`, async (route) => {
+    const request = route.request();
+    expect(request.method()).toBe('POST');
+    expect(request.headers()['content-type']).toBe('application/x-www-form-urlencoded');
+    const body = new URLSearchParams(request.postData());
+    expect(body.get('form-name')).toBe('estimate');
+    expect(body.getAll('services[]')).toEqual(['Siding', 'Windows']);
+    expect(body.get('website')).toBe('');
+    await route.fulfill({ status: 200, contentType: 'text/html', body: '<html>Accepted</html>' });
+  });
+  await page.getByRole('button', { name: /Send Estimate Request/ }).click();
+  await expect(page.getByRole('status')).toContainText('request has been received');
+  await expect(page.getByLabel('Full name')).toHaveValue('');
+  await expect(page.getByRole('status')).toBeFocused();
+});
+
+test('a local preview cannot claim successful delivery', async ({ page }) => {
+  await page.goto('/contact/');
+  await page.getByLabel('Full name').fill('Local Preview');
+  await page.getByLabel('Email', { exact: true }).fill('preview@example.com');
+  await page.getByLabel('City', { exact: true }).fill('Columbus');
+  await page.getByLabel('ZIP / postal code').fill('43215');
+  await page.getByLabel('Siding', { exact: true }).check();
+  await page
+    .getByLabel('Tell us about your project')
+    .fill('Checking a local form, without sending an inquiry.');
+  await page.getByRole('button', { name: /Send Estimate Request/ }).click();
+  await expect(page.getByRole('status')).toContainText('local preview cannot submit');
+  await expect(page.getByRole('status')).toHaveClass(/error/);
+  await expect(page.getByLabel('Full name')).toHaveValue('Local Preview');
+  await expect(page.getByRole('button', { name: /Send Estimate Request/ })).toBeEnabled();
 });
 
 test('pre-rendered service content works without JavaScript', async ({ browser, baseURL }) => {

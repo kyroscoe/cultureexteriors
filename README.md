@@ -46,7 +46,7 @@ Run these from `site/`:
 | `npm run format:check` | Check source formatting without changing files |
 
 Before the first browser test, run `npx playwright install chromium`. Tests use
-mocked delivery or prepare an email draft; they never send a real inquiry.
+mocked Netlify submissions; they never send a real inquiry.
 Generated output, test screenshots, dependencies and local secrets are ignored.
 
 ## GitHub and Netlify
@@ -75,9 +75,11 @@ run after you push and connect the repository.
 
 ## Launch inputs
 
-See [the launch checklist](site/LAUNCH.md). The form currently prepares an email
-draft to **info@cultureexteriors.com**. Automatic delivery still needs a secure
-integration. The hero uses a photograph until approved drone footage is supplied.
+See [the launch checklist](site/LAUNCH.md). The estimate form uses Netlify Forms
+with a static detection definition, URL-encoded submissions and a honeypot. Enable
+form detection and set an email notification to **info@cultureexteriors.com** for
+the `estimate` form. Local previews reject submissions; tests mock acceptance.
+The hero uses a photograph until approved drone footage is supplied.
 Stock photos remain identified as inspiration, with a public credits page.
 
 Implementation references: [Vite](https://vite.dev/guide/),

@@ -1,3 +1,5 @@
+export const ESTIMATE_FORM_NAME = 'estimate';
+
 export function validateEstimate(data) {
   const errors = {};
   const value = (key) => String(data.get(key) || '').trim();
@@ -10,34 +12,28 @@ export function validateEstimate(data) {
     errors.description = 'Describe your project in at least 10 characters.';
   if (value('method') === 'Phone' && !value('phone'))
     errors.phone = 'Enter a phone number for phone contact.';
-  if (!data.getAll('services').length) errors.services = 'Please select at least one service.';
+  if (!data.getAll('services[]').length) errors.services = 'Please select at least one service.';
   return errors;
 }
 
-export function emailDraft(data, email) {
-  const body = `Estimate request\n\nName: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone: ${data.get('phone') || 'Not provided'}\nCity: ${data.get('city')}\nZIP / postal code: ${data.get('postal')}\nServices: ${data.getAll('services').join(', ')}\nPreferred contact: ${data.get('method')}\n\nProject:\n${data.get('description')}`;
-  return `mailto:${email}?subject=${encodeURIComponent('Exterior project estimate request')}&body=${encodeURIComponent(body)}`;
-}
-
-export async function deliverEstimate(endpoint, data) {
+export async function deliverEstimate(data) {
+  const body = new URLSearchParams(data);
+  body.set('form-name', ESTIMATE_FORM_NAME);
   let response;
   try {
-    response = await fetch(endpoint, {
+    response = await fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...Object.fromEntries(data), services: data.getAll('services') }),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
     });
   } catch {
     throw new Error('Connection failed. Please email us directly.');
   }
-  let result;
-  try {
-    result = await response.json();
-  } catch {
-    throw new Error('The delivery service could not confirm acceptance. Please email us directly.');
-  }
-  if (!response.ok || result.accepted !== true)
+  // Netlify responds with HTML, not JSON. A non-2xx response must never show success.
+  if (!response.ok)
     throw new Error(
-      'Your request was not accepted by the delivery service. Please try again or email us directly.',
+      response.status === 501
+        ? 'This local preview cannot submit requests. Please use the live website or email info@cultureexteriors.com.'
+        : 'Your request was not accepted. Your details are still here. Please try again or email info@cultureexteriors.com.',
     );
 }

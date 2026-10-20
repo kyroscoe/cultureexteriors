@@ -22,12 +22,6 @@ export default function Contact() {
           <a className="contact-email" href={`mailto:${content.company.email}`}>
             {content.company.email}
           </a>
-          {!content.estimateEndpoint && (
-            <div className="availability">
-              Online delivery is not configured yet. You can prepare an email draft below, then
-              review and send it using your email app. Nothing is sent automatically.
-            </div>
-          )}
           <p className="note">
             Include your city and ZIP/postal code so we can confirm service availability.
           </p>

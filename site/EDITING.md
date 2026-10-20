@@ -27,7 +27,7 @@ If that port is occupied, use the Local URL printed in the terminal.
 | Gallery filters and approved before/after comparison                     | `src/components/Gallery.jsx`      |
 | Video preferences, playback and still-photo fallback                     | `src/components/HeroMedia.jsx`    |
 | Estimate form fields and states                                          | `src/components/EstimateForm.jsx` |
-| Form validation, email draft and optional delivery integration           | `src/lib/estimate.js`             |
+| Form validation and Netlify Forms submission                             | `src/lib/estimate.js`             |
 | Fonts, sizes, colors, spacing and responsive layouts                     | `src/styles.css`                  |
 | Page URLs, titles and descriptions                                       | `src/routes.js`                   |
 | Photo credits and original sources                                       | `photography/sources.json`        |
@@ -62,7 +62,7 @@ npm run test:e2e
 ```
 
 These exercise desktop and mobile layouts, hydration, menus, dropdowns, filters,
-FAQs and the email draft form. They never send a real inquiry. Screenshots and
+FAQs and mocked Netlify Forms submissions. They never send a real inquiry. Screenshots and
 failure traces are saved in ignored `test-results/`.
 
 ## Production build
@@ -76,6 +76,23 @@ npm run preview
 static HTML with its own metadata. React hydrates that HTML in the browser.
 `scripts/settings.mjs` controls the canonical origin and search indexing.
 There is no production application server.
+
+## Netlify Forms
+
+The visible form posts URL-encoded fields to `/` with `form-name=estimate`.
+Service checkboxes use `services[]` so multiple selections are retained.
+The `email` field supplies the reply-to address, and `website` is the honeypot.
+
+`NetlifyFormDefinition` in `src/components/EstimateForm.jsx` provides a hidden
+HTML definition outside React's root on the built contact page. Netlify can
+process that definition without changing hydrated markup. If you add or rename a
+field, update both forms. `npm run check` verifies that their field names match.
+
+Vite development and preview servers return an error for submissions because they
+cannot process Netlify Forms. Use browser tests with mocks, or the deployed site.
+No local preview simulates a successful delivery. On Netlify, enable form
+detection and configure an email notification to `info@cultureexteriors.com` for
+the `estimate` form.
 
 Do not edit `dist/`; the build replaces it. Never put secrets in `src/`, `public/`,
 content JSON, or environment variables prefixed with `VITE_`.
