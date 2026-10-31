@@ -102,6 +102,7 @@ export function Footer() {
         <div className="footer-bottom">
           <span>© 2026 Culture Homes & Exteriors</span>
           <a href="/contact/#privacy">Privacy</a>
+          <a href="https://kyroscoe.com">powered by kyroscoe</a>
         </div>
       </div>
     </footer>
