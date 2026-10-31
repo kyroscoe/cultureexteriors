@@ -9,7 +9,7 @@ function fillForm() {
     ['Full name', 'Test Homeowner'],
     ['Email', 'homeowner@example.com'],
     ['City', 'Columbus'],
-    ['ZIP / postal code', '43215'],
+    ['ZIP code', '43215'],
     ['Tell us about your project', 'Compare new siding and window trim.'],
   ])
     fireEvent.change(screen.getByLabelText(label), { target: { value } });
@@ -39,7 +39,6 @@ describe('estimate form', () => {
     fireEvent.submit(document.querySelector('form'));
     expect(screen.getByLabelText('Full name')).toHaveFocus();
     expect(screen.getByLabelText('Email')).toHaveAttribute('aria-invalid', 'true');
-    expect(screen.getByText('Please select at least one service.')).toBeVisible();
     expect(screen.getByRole('status')).toHaveTextContent('has not been sent');
   });
   it('posts a multi-service Netlify submission using the detected form name and URL encoding', async () => {
@@ -71,6 +70,17 @@ describe('estimate form', () => {
     fireEvent.submit(document.querySelector('form'));
     expect(document.querySelector('#phone')).toBeRequired();
     expect(screen.getByText('Enter a phone number for phone contact.')).toBeVisible();
+  });
+  it('accepts a project description without selecting a service', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true, status: 200 });
+    render(<EstimateForm />);
+    fillForm();
+    fireEvent.click(screen.getByLabelText('Siding'));
+    fireEvent.click(screen.getByLabelText('Windows'));
+    fireEvent.submit(document.querySelector('form'));
+    await waitFor(() =>
+      expect(screen.getByRole('status')).toHaveTextContent('request has been received'),
+    );
   });
   it('blocks honeypot submissions', () => {
     render(<EstimateForm />);

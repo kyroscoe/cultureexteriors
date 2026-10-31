@@ -49,7 +49,8 @@ for (const [key, metadata] of Object.entries(pages)) {
   const schema = JSON.parse(
     document.querySelector('script[type="application/ld+json"]').textContent,
   );
-  assert.equal(schema.areaServed.name, 'Ohio');
+  assert(!('areaServed' in schema), 'Do not constrain service coverage to an unconfirmed region');
+  assert(!/\bOhio\b/.test(html), `${path}: no state-specific customer copy or metadata`);
   for (const field of ['aggregateRating', 'review', 'address', 'telephone', 'foundingDate'])
     assert(!(field in schema));
   assert(!/[\u00c3\u00c2\u00e2\ufffd\u0080-\u009f]/.test(html), `${path}: valid punctuation`);

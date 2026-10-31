@@ -1,13 +1,13 @@
 export const pages = {
   home: {
-    title: 'Ohio Siding, Roofing, Windows & Gutters',
+    title: 'Siding, Roofing, Windows & Gutters',
     description:
-      'Culture Homes & Exteriors helps Ohio homeowners with siding, roofing, windows, and gutters. Get in touch to discuss your home and request an estimate.',
+      'Culture Homes & Exteriors helps homeowners with siding, roofing, windows, and gutters. Get in touch to discuss your home and request an estimate.',
   },
   contact: {
     title: 'Contact',
     description:
-      'Tell Culture Homes & Exteriors about your Ohio home and the exterior work you have in mind.',
+      'Tell Culture Homes & Exteriors about your home and the exterior work you have in mind.',
   },
   404: {
     title: 'Page Not Found',

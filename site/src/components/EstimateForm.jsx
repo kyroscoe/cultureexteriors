@@ -18,10 +18,7 @@ export default function EstimateForm() {
   }, []);
   useEffect(() => {
     const first = Object.keys(errors)[0];
-    if (first)
-      formRef.current
-        .querySelector(first === 'services' ? '[name="services[]"]' : `#${first}`)
-        .focus();
+    if (first) formRef.current.querySelector(`#${first}`).focus();
   }, [errors]);
 
   async function submit(event) {
@@ -118,31 +115,20 @@ export default function EstimateForm() {
           { type: 'tel', autoComplete: 'tel', maxLength: 40 },
         )}
         {field('city', 'City', { autoComplete: 'address-level2', maxLength: 100 })}
-        {field('postal', 'ZIP / postal code', { autoComplete: 'postal-code', maxLength: 20 })}
+        {field('postal', 'ZIP code', { autoComplete: 'postal-code', maxLength: 20 })}
       </div>
       <fieldset>
         <legend>
-          What are you considering? <span className="note">Select all that apply.</span>
+          What are you considering? <span className="note">Optional. Select all that apply.</span>
         </legend>
         <div className="checks">
-          {Object.values(content.services).map((service, index) => (
+          {Object.values(content.services).map((service) => (
             <label key={service.title}>
-              <input
-                type="checkbox"
-                name="services[]"
-                value={service.title}
-                aria-invalid={index === 0 && errors.services ? true : undefined}
-                aria-describedby={index === 0 && errors.services ? 'service-error' : undefined}
-              />
+              <input type="checkbox" name="services[]" value={service.title} />
               {service.title}
             </label>
           ))}
         </div>
-        {errors.services && (
-          <p id="service-error" className="field-error">
-            {errors.services}
-          </p>
-        )}
       </fieldset>
       <div className="field">
         <label htmlFor="description">Tell us about your project</label>
@@ -162,7 +148,7 @@ export default function EstimateForm() {
           </span>
         )}
       </div>
-      <div className="field" style={{ marginTop: 20 }}>
+      <div className="field" style={{ marginTop: 20 }} hidden={!enhanced}>
         <label htmlFor="method">Preferred contact method</label>
         <select
           id="method"
@@ -170,11 +156,16 @@ export default function EstimateForm() {
           value={method}
           onChange={(event) => setMethod(event.target.value)}
           required
+          disabled={!enhanced}
         >
           <option value="Email">Email</option>
           <option value="Phone">Phone</option>
         </select>
       </div>
+      <noscript>
+        <input type="hidden" name="method" value="Email" />
+        <p className="note">We’ll reply by email.</p>
+      </noscript>
       <p className="form-note">
         Your details are used to respond to your project inquiry. No marketing signup is required.{' '}
         <a href="#privacy">Privacy notice</a>

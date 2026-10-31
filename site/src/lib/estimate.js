@@ -12,7 +12,6 @@ export function validateEstimate(data) {
     errors.description = 'Describe your project in at least 10 characters.';
   if (value('method') === 'Phone' && !value('phone'))
     errors.phone = 'Enter a phone number for phone contact.';
-  if (!data.getAll('services[]').length) errors.services = 'Please select at least one service.';
   return errors;
 }
 

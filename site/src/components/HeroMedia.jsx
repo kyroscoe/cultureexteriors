@@ -107,7 +107,7 @@ export default function HeroMedia({ footage = content.heroVideo }) {
         <span>Home, in perspective.</span>
         <div>
           <span id="video-label">
-            {available ? 'A new perspective on home' : 'Still photograph'}
+            {available ? 'A new perspective on home' : 'Inspiration photograph'}
           </span>
           {available && (
             <button

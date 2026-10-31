@@ -32,8 +32,7 @@ const business = {
   name: 'Culture Homes & Exteriors',
   url: origin,
   email: 'info@cultureexteriors.com',
-  areaServed: { '@type': 'State', name: 'Ohio' },
-  description: 'Residential siding, roofing, windows, and gutters for Ohio homeowners.',
+  description: 'Residential siding, roofing, windows, and gutters for your home.',
 };
 
 // Vite transforms the JSX for Node. No server or Python is needed after the build.

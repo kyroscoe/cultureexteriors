@@ -11,15 +11,15 @@ export default function Home() {
           <div>
             <span className="eyebrow">Culture Homes & Exteriors</span>
             <h1>
-              Built to Protect.
+              Built to protect.
               <br />
               Designed to last.
             </h1>
           </div>
           <div className="hero-intro">
             <p>
-              Siding, roofing, windows, and gutters for home. Tell us what needs attention. We’ll
-              help you plan the next step.
+              Siding, roofing, windows, and gutters for your home. Tell us what needs attention.
+              We’ll help you plan the next step.
             </p>
             <Button />
             <a className="text-link" href="#services">
@@ -42,7 +42,7 @@ export default function Home() {
               same plan.
             </p>
             <a className="text-link" href="#about">
-              About Culture Homes & Exteriors ↗
+              Our approach ↓
             </a>
           </div>
           <div className="service-links">
@@ -58,7 +58,8 @@ export default function Home() {
               </a>
             ))}
             <p className="note">
-              Materials and project scope are confirmed directly with Culture Homes & Exteriors.
+              Contact us about your project. We’ll confirm materials, scope, and availability
+              together.
             </p>
           </div>
         </div>
@@ -67,7 +68,7 @@ export default function Home() {
         <div className="wrap story-layout">
           <figure className="story-portrait">
             <Photo name="siding" alt={content.services.siding.alt} />
-            <figcaption>Lap siding, window trim & soffit.</figcaption>
+            <figcaption>Lap siding, window trim & soffit. Inspiration photograph.</figcaption>
           </figure>
           <div className="story-copy">
             <span className="eyebrow">The details at eye level</span>
@@ -88,7 +89,7 @@ export default function Home() {
                 name="eaves"
                 alt="White soffit, fascia and gutter at a residential roof edge against a blue sky. Photograph by Sebastian Schuster."
               />
-              <figcaption>Soffit, fascia & the roof edge.</figcaption>
+              <figcaption>Soffit, fascia & the roof edge. Inspiration photograph.</figcaption>
             </figure>
           </div>
         </div>

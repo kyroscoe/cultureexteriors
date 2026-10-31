@@ -15,21 +15,21 @@ If that port is occupied, use the Local URL printed in the terminal.
 
 ## Where to make changes
 
-| Change                                                                   | Source file                       |
-| ------------------------------------------------------------------------ | --------------------------------- |
-| Homepage text and sections                                               | `src/pages/Home.jsx`              |
-| Service descriptions, comparisons, company details and optional features | `src/data/content.json`           |
-| Contact page                                                             | `src/pages/Contact.jsx`           |
-| Missing-page content                                                     | `src/pages/NotFound.jsx`          |
-| Header logo and estimate button                                          | `src/components/Header.jsx`       |
-| Footer, buttons, photos and shared page layout                           | `src/components/Shared.jsx`       |
-| Video preferences, playback and still-photo fallback                     | `src/components/HeroMedia.jsx`    |
-| Estimate form fields and states                                          | `src/components/EstimateForm.jsx` |
-| Form validation and Netlify Forms submission                             | `src/lib/estimate.js`             |
-| Fonts, sizes, colors, spacing and responsive layouts                     | `src/styles.css`                  |
-| Page URLs, titles and descriptions                                       | `src/routes.js`                   |
-| Photo credits and original sources                                       | `photography/sources.json`        |
-| Image dimensions after replacing photographs                             | `src/data/asset-dimensions.json`  |
+| Change                                                 | Source file                       |
+| ------------------------------------------------------ | --------------------------------- |
+| Homepage text and sections                             | `src/pages/Home.jsx`              |
+| Service overview, company details and optional footage | `src/data/content.json`           |
+| Contact page                                           | `src/pages/Contact.jsx`           |
+| Missing-page content                                   | `src/pages/NotFound.jsx`          |
+| Header logo and estimate button                        | `src/components/Header.jsx`       |
+| Footer, buttons, photos and shared page layout         | `src/components/Shared.jsx`       |
+| Video preferences, playback and still-photo fallback   | `src/components/HeroMedia.jsx`    |
+| Estimate form fields and states                        | `src/components/EstimateForm.jsx` |
+| Form validation and Netlify Forms submission           | `src/lib/estimate.js`             |
+| Fonts, sizes, colors, spacing and responsive layouts   | `src/styles.css`                  |
+| Page URLs, titles and descriptions                     | `src/routes.js`                   |
+| Photo credits and original sources                     | `photography/sources.json`        |
+| Image dimensions after replacing photographs           | `src/data/asset-dimensions.json`  |
 
 CSS section comments identify the main areas. Responsive overrides appear toward
 the bottom; check the relevant mobile override when changing a size.
@@ -79,7 +79,9 @@ notice is on the contact page. There is no production application server.
 ## Netlify Forms
 
 The visible form posts URL-encoded fields to `/` with `form-name=estimate`.
-Service checkboxes use `services[]` so multiple selections are retained.
+Optional service checkboxes use `services[]` so multiple selections are retained.
+Without JavaScript, inquiries use email replies; with JavaScript, choosing a phone
+reply requires a phone number.
 The `email` field supplies the reply-to address, and `website` is the honeypot.
 
 `NetlifyFormDefinition` in `src/components/EstimateForm.jsx` provides a hidden

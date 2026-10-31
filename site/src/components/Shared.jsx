@@ -100,7 +100,9 @@ export function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 Culture Homes & Exteriors</span>
+          <span suppressHydrationWarning>
+            © {new Date().getFullYear()} Culture Homes & Exteriors
+          </span>
           <a href="/contact/#privacy">Privacy</a>
           <a href="https://kyroscoe.com">powered by kyroscoe</a>
         </div>

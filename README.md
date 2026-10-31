@@ -1,7 +1,7 @@
 # Culture Homes & Exteriors
 
 A React + Vite website using JavaScript, JSX and plain CSS. The existing design,
-logo, Ohio service content, larger text and interactions are retained. No Python
+logo, service overview, larger text and interactions are retained. No Python
 installation is needed.
 
 ## Run locally
@@ -20,7 +20,7 @@ If that port is occupied, use the next available Local URL printed in the termin
 ## Source
 
 - `site/src/pages/`: page layouts written in JSX.
-- `site/src/components/`: header, footer, form, gallery and media components.
+- `site/src/components/`: header, footer, form and media components.
 - `site/src/data/content.json`: editable service and company information.
 - `site/src/styles.css`: shared styling and responsive overrides.
 - `site/src/routes.js`: page URLs and search/social metadata.

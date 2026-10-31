@@ -5,7 +5,7 @@ export const generalFaqs = [
   ],
   [
     'Can I plan more than one service together?',
-    'Yes. Select multiple services in your estimate request. Coordinating roof edges, windows, siding, and drainage can help identify details that need to work together. Availability and scope will be confirmed.',
+    'Yes. You can select multiple services in your estimate request. Coordinating roof edges, windows, siding, and drainage helps identify details that need to work together.',
   ],
   [
     'Which materials do you install?',
@@ -13,7 +13,7 @@ export const generalFaqs = [
   ],
   [
     'Do you serve my area?',
-    'Culture Homes & Exteriors serves Ohio. Send your city and ZIP code to check availability for your specific location and project.',
+    'Send your city and ZIP code with a few project details. We’ll confirm availability for your location and the work you have in mind.',
   ],
   [
     'How much will my project cost?',

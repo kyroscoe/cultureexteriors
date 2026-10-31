@@ -69,7 +69,7 @@ test('homepage FAQs, contact validation and Netlify submission work', async ({
   await page.getByLabel('Full name').fill('Preview Homeowner');
   await page.getByLabel('Email', { exact: true }).fill('preview@example.com');
   await page.getByLabel('City', { exact: true }).fill('Columbus');
-  await page.getByLabel('ZIP / postal code').fill('43215');
+  await page.getByLabel('ZIP code').fill('43215');
   await page.getByLabel('Siding', { exact: true }).check();
   await page.getByLabel('Windows', { exact: true }).check();
   await page
@@ -96,7 +96,7 @@ test('a local preview cannot claim successful delivery', async ({ page }) => {
   await page.getByLabel('Full name').fill('Local Preview');
   await page.getByLabel('Email', { exact: true }).fill('preview@example.com');
   await page.getByLabel('City', { exact: true }).fill('Columbus');
-  await page.getByLabel('ZIP / postal code').fill('43215');
+  await page.getByLabel('ZIP code').fill('43215');
   await page.getByLabel('Siding', { exact: true }).check();
   await page
     .getByLabel('Tell us about your project')
@@ -112,9 +112,41 @@ test('pre-rendered homepage and contact work without JavaScript', async ({ brows
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto(`${baseURL}/`);
-  await expect(page.locator('main h1')).toContainText('Built to Protect.');
+  await expect(page.locator('main h1')).toContainText('Built to protect.');
   await expect(page.locator('#services')).toBeVisible();
   await page.getByRole('link', { name: 'Request an Estimate', exact: true }).first().click();
   await expect(page.locator('#estimate-form')).toBeVisible();
+  await expect(page.getByLabel('Preferred contact method')).toBeHidden();
+  await expect(page.locator('noscript .note')).toBeVisible();
+  await page.getByLabel('Full name').fill('Native Preview');
+  await page.getByLabel('Email', { exact: true }).fill('native@example.com');
+  await page.getByLabel('City', { exact: true }).fill('Richmond');
+  await page.getByLabel('ZIP code').fill('47374');
+  await page.getByLabel('Tell us about your project').fill('Planning exterior improvements.');
+  await page.route(`${baseURL}/`, async (route) => {
+    const body = new URLSearchParams(route.request().postData());
+    expect(body.getAll('method')).toEqual(['Email']);
+    expect(body.getAll('services[]')).toEqual([]);
+    await route.fulfill({ status: 200, contentType: 'text/html', body: '<h1>Accepted</h1>' });
+  });
+  await page.getByRole('button', { name: /Send Estimate Request/ }).click();
+  await expect(page.getByRole('heading', { name: 'Accepted' })).toBeVisible();
   await context.close();
+});
+
+test('privacy links open the notice, including repeated visits and direct links', async ({
+  page,
+}) => {
+  await page.goto('/contact/');
+  await page.locator('.form-note a').click();
+  await expect(page.locator('#privacy')).toHaveAttribute('open', '');
+  await page.locator('#privacy summary').click();
+  await expect(page.locator('#privacy')).not.toHaveAttribute('open');
+  await page.locator('.form-note a').click();
+  await expect(page.locator('#privacy')).toHaveAttribute('open', '');
+  await page.goto('/contact/#privacy');
+  await expect(page.locator('#privacy')).toHaveAttribute('open', '');
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Privacy', exact: true }).click();
+  await expect(page.locator('#privacy')).toHaveAttribute('open', '');
 });
