@@ -25,7 +25,7 @@ export default function App({ pageKey = 'home' }) {
   }, [pageKey]);
   return (
     <>
-      <Header current={pageKey} />
+      <Header />
       <main id="main">
         {pageKey === 'home' ? <Home /> : pageKey === 'contact' ? <Contact /> : <NotFound />}
       </main>

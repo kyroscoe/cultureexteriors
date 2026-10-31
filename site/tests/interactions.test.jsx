@@ -1,5 +1,4 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import Header from '../src/components/Header';
 import HeroMedia from '../src/components/HeroMedia';
@@ -18,22 +17,19 @@ function fillForm() {
   fireEvent.click(screen.getByLabelText('Windows'));
 }
 
-describe('navigation', () => {
-  it('shows only Home and Contact, operates the mobile menu, and returns focus on Escape', async () => {
-    const user = userEvent.setup();
-    render(<Header current="home" />);
-    const menu = screen.getByRole('button', { name: /Menu/ });
-    await user.click(menu);
-    expect(menu).toHaveAttribute('aria-expanded', 'true');
-    const nav = screen.getByRole('navigation');
-    expect([...nav.querySelectorAll('a')].map((link) => link.getAttribute('href'))).toEqual([
+describe('header', () => {
+  it('keeps the logo and estimate link without navigation or a menu', () => {
+    render(<Header />);
+    expect(screen.getByRole('link', { name: 'Culture Homes & Exteriors home' })).toHaveAttribute(
+      'href',
       '/',
+    );
+    expect(screen.getByRole('link', { name: 'Request an Estimate' })).toHaveAttribute(
+      'href',
       '/contact/',
-    ]);
-    expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
-    await user.keyboard('{Escape}');
-    expect(menu).toHaveAttribute('aria-expanded', 'false');
-    expect(menu).toHaveFocus();
+    );
+    expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 });
 

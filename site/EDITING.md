@@ -21,7 +21,7 @@ If that port is occupied, use the Local URL printed in the terminal.
 | Service descriptions, comparisons, company details and optional features | `src/data/content.json`           |
 | Contact page                                                             | `src/pages/Contact.jsx`           |
 | Missing-page content                                                     | `src/pages/NotFound.jsx`          |
-| Header and mobile menu                                                   | `src/components/Header.jsx`       |
+| Header logo and estimate button                                          | `src/components/Header.jsx`       |
 | Footer, buttons, photos and shared page layout                           | `src/components/Shared.jsx`       |
 | Video preferences, playback and still-photo fallback                     | `src/components/HeroMedia.jsx`    |
 | Estimate form fields and states                                          | `src/components/EstimateForm.jsx` |

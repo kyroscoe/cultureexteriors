@@ -9,9 +9,7 @@ async function loadPhotographs(page) {
   await page.evaluate(() => window.scrollTo(0, 0));
 }
 
-test('all pages hydrate, navigation works, and layouts fit the viewport', async ({
-  page,
-}, testInfo) => {
+test('all pages hydrate, header stays simple, and layouts fit the viewport', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('console', (message) => {
@@ -28,16 +26,9 @@ test('all pages hydrate, navigation works, and layouts fit the viewport', async 
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
     ).toBe(true);
-    if (testInfo.project.name === 'mobile')
-      await page.getByRole('button', { name: 'Menu ☰' }).click();
-    const nav = page.getByRole('navigation');
-    await expect(nav.getByRole('link')).toHaveCount(2);
-    await expect(nav.getByRole('link', { name: 'Home', exact: true })).toHaveAttribute('href', '/');
-    await expect(nav.getByRole('link', { name: 'Contact', exact: true })).toHaveAttribute(
-      'href',
-      '/contact/',
-    );
-    if (testInfo.project.name === 'mobile') await page.keyboard.press('Escape');
+    const header = page.locator('header');
+    await expect(header.locator('nav, button')).toHaveCount(0);
+    await expect(header.getByRole('link', { name: 'Request an Estimate' })).toBeVisible();
   }
   await page.goto('/not-a-real-page/');
   await expect(page.locator('main h1')).toHaveText('That page isn’t here.');
