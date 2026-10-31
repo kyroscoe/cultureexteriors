@@ -9,7 +9,7 @@ export const generalFaqs = [
   ],
   [
     'Which materials do you install?',
-    'Ask us which materials suit your home and are available for your project. The guides below explain the differences between common choices.',
+    'Ask us which materials suit your home and are available for your project. We can talk through the choices when you get in touch.',
   ],
   [
     'Do you serve my area?',

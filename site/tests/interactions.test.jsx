@@ -2,7 +2,6 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import Header from '../src/components/Header';
-import Gallery, { BeforeAfter } from '../src/components/Gallery';
 import HeroMedia from '../src/components/HeroMedia';
 import EstimateForm from '../src/components/EstimateForm';
 
@@ -19,61 +18,22 @@ function fillForm() {
   fireEvent.click(screen.getByLabelText('Windows'));
 }
 
-describe('navigation and gallery', () => {
-  it('opens the mobile menu, operates every dropdown, and returns focus on Escape', async () => {
+describe('navigation', () => {
+  it('shows only Home and Contact, operates the mobile menu, and returns focus on Escape', async () => {
     const user = userEvent.setup();
     render(<Header current="home" />);
     const menu = screen.getByRole('button', { name: /Menu/ });
     await user.click(menu);
     expect(menu).toHaveAttribute('aria-expanded', 'true');
-    for (const service of ['siding', 'roofing', 'windows', 'gutters']) {
-      const toggle = screen.getByRole('button', { name: `Show ${service} topics` });
-      await user.click(toggle);
-      expect(toggle).toHaveAttribute('aria-expanded', 'true');
-      expect(document.querySelector(`#nav-${service}`)).toContainElement(
-        document.querySelector(`a[href="/${service}/#options"]`),
-      );
-      await user.keyboard('{Escape}');
-      expect(toggle).toHaveFocus();
-      expect(toggle).toHaveAttribute('aria-expanded', 'false');
-    }
+    const nav = screen.getByRole('navigation');
+    expect([...nav.querySelectorAll('a')].map((link) => link.getAttribute('href'))).toEqual([
+      '/',
+      '/contact/',
+    ]);
+    expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
     await user.keyboard('{Escape}');
     expect(menu).toHaveAttribute('aria-expanded', 'false');
     expect(menu).toHaveFocus();
-  });
-  it('closes a dropdown on outside click and when focus leaves its group', async () => {
-    const user = userEvent.setup();
-    render(<Header current="siding" />);
-    const toggle = screen.getByRole('button', { name: 'Show siding topics' });
-    await user.click(toggle);
-    await user.click(screen.getByRole('link', { name: 'Home' }));
-    expect(toggle).toHaveAttribute('aria-expanded', 'false');
-    await user.click(toggle);
-    fireEvent.blur(toggle, { relatedTarget: screen.getByRole('link', { name: 'Contact' }) });
-    expect(toggle).toHaveAttribute('aria-expanded', 'false');
-  });
-  it('filters each service and announces the number of images', async () => {
-    const user = userEvent.setup();
-    render(<Gallery />);
-    for (const label of ['Siding', 'Roofing', 'Windows', 'Gutters']) {
-      await user.click(screen.getByRole('button', { name: label }));
-      expect(document.querySelectorAll('figure:not([hidden])')).toHaveLength(1);
-      expect(document.querySelector('#gallery-status')).toHaveTextContent(
-        `Showing 1 ${label.toLowerCase()} image`,
-      );
-    }
-    await user.click(screen.getByRole('button', { name: 'All details' }));
-    expect(document.querySelectorAll('figure:not([hidden])')).toHaveLength(4);
-  });
-  it('only displays approved comparison photos and supports a keyboard-accessible range', () => {
-    const { rerender } = render(<BeforeAfter />);
-    expect(screen.queryByRole('slider')).not.toBeInTheDocument();
-    rerender(<BeforeAfter pair={{ approved: true, before: '/before.jpg', after: '/after.jpg' }} />);
-    fireEvent.change(screen.getByRole('slider'), { target: { value: '70' } });
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '70 percent before photo');
-    expect(screen.getByAltText('Before the exterior project')).toHaveStyle({
-      clipPath: 'inset(0 30% 0 0)',
-    });
   });
 });
 

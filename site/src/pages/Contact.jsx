@@ -5,7 +5,7 @@ import EstimateForm from '../components/EstimateForm';
 export default function Contact() {
   return (
     <PageLayout
-      title="Request an Estimate"
+      title="Contact"
       headline="Tell us about the work."
       intro="Tell Culture Homes & Exteriors about your Ohio home and the exterior work you have in mind."
       cta={false}
@@ -28,6 +28,21 @@ export default function Contact() {
         </aside>
         <EstimateForm />
       </div>
+      <details className="faq contact-privacy" id="privacy">
+        <summary>Privacy notice</summary>
+        <p>
+          Your contact details, location, selected services, and project description are sent to
+          Culture Homes & Exteriors through Netlify Forms, which processes and stores submissions to
+          handle inquiries and filter spam. We use your details to respond to your inquiry. No
+          marketing signup is required.
+        </p>
+        <p>
+          No advertising trackers or analytics have been added. Google Fonts receives routine
+          connection information when fonts load, and the hosting provider may keep access logs. For
+          questions about your information, email{' '}
+          <a href={`mailto:${content.company.email}`}>{content.company.email}</a>.
+        </p>
+      </details>
     </PageLayout>
   );
 }

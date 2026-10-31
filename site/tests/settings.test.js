@@ -30,10 +30,23 @@ describe('deployment settings and routes', () => {
     expect(shouldIndex({ CONTEXT: 'deploy-preview' })).toBe(false);
     expect(shouldIndex({})).toBe(false);
   });
-  it('preserves all service URLs and a genuine missing-page route', () => {
+  it('serves the homepage and contact with a genuine missing-page route', () => {
     expect(routeKey('/')).toBe('home');
-    expect(routeKey('/siding/')).toBe('siding');
-    expect(routeKey('/windows')).toBe('windows');
+    expect(routeKey('/contact/')).toBe('contact');
+    expect(routeKey('/contact')).toBe('contact');
+    for (const removed of [
+      'siding',
+      'roofing',
+      'windows',
+      'gutters',
+      'about',
+      'our-work',
+      'faqs',
+      'service-area',
+      'privacy',
+      'photography',
+    ])
+      expect(routeKey(`/${removed}/`)).toBe('404');
     expect(routeKey('/missing/')).toBe('404');
     expect(routeKey('/404.html')).toBe('404');
     expect(pagePath('404')).toBe('/404.html');

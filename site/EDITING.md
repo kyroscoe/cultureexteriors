@@ -18,13 +18,11 @@ If that port is occupied, use the Local URL printed in the terminal.
 | Change                                                                   | Source file                       |
 | ------------------------------------------------------------------------ | --------------------------------- |
 | Homepage text and sections                                               | `src/pages/Home.jsx`              |
-| Shared service-page layout                                               | `src/pages/Service.jsx`           |
 | Service descriptions, comparisons, company details and optional features | `src/data/content.json`           |
 | Contact page                                                             | `src/pages/Contact.jsx`           |
-| About, FAQs, service area, privacy, photo credits and 404                | `src/pages/Information.jsx`       |
-| Header, mobile menu and service dropdowns                                | `src/components/Header.jsx`       |
+| Missing-page content                                                     | `src/pages/NotFound.jsx`          |
+| Header and mobile menu                                                   | `src/components/Header.jsx`       |
 | Footer, buttons, photos and shared page layout                           | `src/components/Shared.jsx`       |
-| Gallery filters and approved before/after comparison                     | `src/components/Gallery.jsx`      |
 | Video preferences, playback and still-photo fallback                     | `src/components/HeroMedia.jsx`    |
 | Estimate form fields and states                                          | `src/components/EstimateForm.jsx` |
 | Form validation and Netlify Forms submission                             | `src/lib/estimate.js`             |
@@ -61,7 +59,7 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-These exercise desktop and mobile layouts, hydration, menus, dropdowns, filters,
+These exercise desktop and mobile layouts, hydration, navigation,
 FAQs and mocked Netlify Forms submissions. They never send a real inquiry. Screenshots and
 failure traces are saved in ignored `test-results/`.
 
@@ -75,7 +73,8 @@ npm run preview
 `scripts/build.mjs` uses Vite to bundle the app and renders each React page into
 static HTML with its own metadata. React hydrates that HTML in the browser.
 `scripts/settings.mjs` controls the canonical origin and search indexing.
-There is no production application server.
+Only the homepage, contact page, and a 404 fallback are generated. The privacy
+notice is on the contact page. There is no production application server.
 
 ## Netlify Forms
 

@@ -106,9 +106,9 @@ export default function HeroMedia({ footage = content.heroVideo }) {
       <div className="media-caption">
         <span>Home, in perspective.</span>
         <div>
-          <a href="/photography/" id="video-label">
+          <span id="video-label">
             {available ? 'A new perspective on home' : 'Still photograph'}
-          </a>
+          </span>
           {available && (
             <button
               className="video-control"

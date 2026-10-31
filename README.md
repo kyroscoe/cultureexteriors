@@ -35,15 +35,15 @@ See [the editing guide](site/EDITING.md) for specific file locations.
 
 Run these from `site/`:
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Vite development server with hot reload |
-| `npm run build` | Bundle React and pre-render all pages into `dist/` |
-| `npm run preview` | Preview the production build locally |
-| `npm run check` | Component tests, production build and output/HTTP checks |
-| `npm run test:e2e` | Desktop and mobile Chromium browser tests |
-| `npm run format` | Format source with Prettier |
-| `npm run format:check` | Check source formatting without changing files |
+| Command                | Purpose                                                  |
+| ---------------------- | -------------------------------------------------------- |
+| `npm run dev`          | Vite development server with hot reload                  |
+| `npm run build`        | Bundle React and pre-render all pages into `dist/`       |
+| `npm run preview`      | Preview the production build locally                     |
+| `npm run check`        | Component tests, production build and output/HTTP checks |
+| `npm run test:e2e`     | Desktop and mobile Chromium browser tests                |
+| `npm run format`       | Format source with Prettier                              |
+| `npm run format:check` | Check source formatting without changing files           |
 
 Before the first browser test, run `npx playwright install chromium`. Tests use
 mocked Netlify submissions; they never send a real inquiry.
@@ -57,11 +57,11 @@ Push this repository, including `site/`. The root `netlify.toml` sets:
 - **Build:** `npm run build`
 - **Publish:** `dist`
 
-Node builds all 12 pages and `404.html` ahead of time. Each page has content and
+Node builds the homepage, contact page and `404.html` ahead of time. Each page has content and
 unique metadata before JavaScript runs; React hydrates it for interactions.
 Netlify serves static files and does not need a Node or Python application server.
-Do not add an SPA catch-all redirect: the service URLs have actual HTML pages,
-and unknown URLs should return the custom 404 response.
+Do not add an SPA catch-all redirect: the two pages have actual HTML files,
+and unknown URLs return the custom 404 response.
 
 The build uses Netlify's production `URL` for canonicals, social metadata, business
 data and sitemap. Set `SITE_URL=https://your-domain.example` to override it.
@@ -80,7 +80,9 @@ with a static detection definition, URL-encoded submissions and a honeypot. Enab
 form detection and set an email notification to **info@cultureexteriors.com** for
 the `estimate` form. Local previews reject submissions; tests mock acceptance.
 The hero uses a photograph until approved drone footage is supplied.
-Stock photos remain identified as inspiration, with a public credits page.
+The reference library and nested service pages have been removed. The homepage
+retains its original layout and typography, with project links leading to Contact.
+Stock photo source records remain in `site/photography/sources.json`.
 
 Implementation references: [Vite](https://vite.dev/guide/),
 [Vite pre-rendering](https://vite.dev/guide/ssr.html#pre-rendering-ssg),

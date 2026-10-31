@@ -29,6 +29,6 @@ References: [Netlify Forms](https://docs.netlify.com/manage/forms/setup/), [noti
 
 Confirmed information: Culture Homes & Exteriors, the supplied logo, Ohio, siding/roofing/windows/gutters, and info@cultureexteriors.com. City coverage, product availability, specific repair/inspection/low-slope capabilities and operational details still require owner approval. No unverified team, history, credentials, ratings, warranties, financing or manufacturer relationships are published.
 
-Supply licensed slow pullback/ascent drone footage and a matching poster to enable the conditional video component. Approved company projects and matched before/after photographs are needed before replacing the stock-only Exterior Inspiration presentation with Our Work. Verified reviews and other optional sections remain hidden until supplied.
+Supply licensed slow pullback/ascent drone footage and a matching poster to enable the conditional video component. The starter site has a homepage and Contact page. The reference library and nested service pages are removed.
 
-Photo records are retained in `photography/sources.json` and the public credits page.
+Photo source records are retained in `photography/sources.json`.

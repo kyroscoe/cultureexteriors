@@ -177,7 +177,7 @@ export default function EstimateForm() {
       </div>
       <p className="form-note">
         Your details are used to respond to your project inquiry. No marketing signup is required.{' '}
-        <a href="/privacy/">Privacy notice</a>
+        <a href="#privacy">Privacy notice</a>
       </p>
       <button className="btn" type="submit" id="submit-estimate" disabled={busy}>
         {busy ? 'Please wait…' : 'Send Estimate Request'} <span aria-hidden="true">↗</span>

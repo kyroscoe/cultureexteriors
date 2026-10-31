@@ -1,33 +1,12 @@
 import { useEffect } from 'react';
-import content from './data/content.json';
 import Header from './components/Header';
 import { Footer } from './components/Shared';
 import Home from './pages/Home';
-import Service from './pages/Service';
 import Contact from './pages/Contact';
-import {
-  About,
-  FaqPage,
-  Inspiration,
-  NotFound,
-  Photography,
-  Privacy,
-  ServiceArea,
-} from './pages/Information';
+import NotFound from './pages/NotFound';
 import { pages } from './routes';
 
-const informationPages = {
-  'our-work': Inspiration,
-  about: About,
-  faqs: FaqPage,
-  'service-area': ServiceArea,
-  privacy: Privacy,
-  photography: Photography,
-  404: NotFound,
-};
-
 export default function App({ pageKey = 'home' }) {
-  const Page = informationPages[pageKey];
   useEffect(() => {
     document.body.className = `page-${pageKey}`;
     document.title = `${pages[pageKey].title} | Culture Homes & Exteriors`;
@@ -48,15 +27,7 @@ export default function App({ pageKey = 'home' }) {
     <>
       <Header current={pageKey} />
       <main id="main">
-        {pageKey === 'home' ? (
-          <Home />
-        ) : content.services[pageKey] ? (
-          <Service serviceKey={pageKey} />
-        ) : pageKey === 'contact' ? (
-          <Contact />
-        ) : (
-          <Page />
-        )}
+        {pageKey === 'home' ? <Home /> : pageKey === 'contact' ? <Contact /> : <NotFound />}
       </main>
       <Footer />
     </>

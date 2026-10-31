@@ -90,18 +90,8 @@ export function Footer() {
           </div>
           <div>
             <h3>Explore</h3>
-            {Object.entries(content.services).map(([key, service]) => (
-              <a href={`/${key}/`} key={key}>
-                {service.title}
-              </a>
-            ))}
-          </div>
-          <div>
-            <h3>Culture Homes & Exteriors</h3>
-            <a href="/about/">About us</a>
-            <a href="/our-work/">Exterior Inspiration</a>
-            <a href="/faqs/">FAQs</a>
-            <a href="/service-area/">Service area</a>
+            <a href="/">Home</a>
+            <a href="/contact/">Contact</a>
           </div>
           <div>
             <h3>Start a conversation</h3>
@@ -111,7 +101,7 @@ export function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 Culture Homes & Exteriors</span>
-          <a href="/privacy/">Privacy</a>
+          <a href="/contact/#privacy">Privacy</a>
         </div>
       </div>
     </footer>

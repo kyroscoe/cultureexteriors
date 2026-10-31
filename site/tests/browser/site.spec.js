@@ -24,26 +24,19 @@ test('all pages hydrate, navigation works, and layouts fit the viewport', async 
     await expect(page).toHaveTitle(`${metadata.title} | Culture Homes & Exteriors`);
     await expect(page.locator('main h1')).toBeVisible();
     await loadPhotographs(page);
-    if (['siding', 'roofing', 'windows', 'gutters'].includes(key)) {
-      await page.screenshot({
-        path: testInfo.outputPath(`${key}.png`),
-        fullPage: true,
-        animations: 'disabled',
-      });
-    }
+
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
     ).toBe(true);
     if (testInfo.project.name === 'mobile')
       await page.getByRole('button', { name: 'Menu ☰' }).click();
-    for (const service of ['siding', 'roofing', 'windows', 'gutters']) {
-      const toggle = page.getByRole('button', { name: `Show ${service} topics` });
-      await toggle.click();
-      await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-      await expect(page.locator(`#nav-${service} a`).first()).toBeVisible();
-      await page.keyboard.press('Escape');
-      await expect(toggle).toBeFocused();
-    }
+    const nav = page.getByRole('navigation');
+    await expect(nav.getByRole('link')).toHaveCount(2);
+    await expect(nav.getByRole('link', { name: 'Home', exact: true })).toHaveAttribute('href', '/');
+    await expect(nav.getByRole('link', { name: 'Contact', exact: true })).toHaveAttribute(
+      'href',
+      '/contact/',
+    );
     if (testInfo.project.name === 'mobile') await page.keyboard.press('Escape');
   }
   await page.goto('/not-a-real-page/');
@@ -51,7 +44,7 @@ test('all pages hydrate, navigation works, and layouts fit the viewport', async 
   expect(errors).toEqual([]);
 });
 
-test('gallery filters, FAQs, contact validation and Netlify submission work', async ({
+test('homepage FAQs, contact validation and Netlify submission work', async ({
   page,
 }, testInfo) => {
   await page.goto('/');
@@ -65,15 +58,7 @@ test('gallery filters, FAQs, contact validation and Netlify submission work', as
     fullPage: true,
     animations: 'disabled',
   });
-  for (const label of ['Siding', 'Roofing', 'Windows', 'Gutters']) {
-    await page.getByRole('button', { name: label, exact: true }).click();
-    await expect(page.locator('.gallery figure:visible')).toHaveCount(1);
-    await expect(page.locator('#gallery-status')).toHaveText(
-      `Showing 1 ${label.toLowerCase()} image`,
-    );
-  }
-  await page.getByRole('button', { name: 'All details' }).click();
-  await expect(page.locator('.gallery figure:visible')).toHaveCount(4);
+  await expect(page.locator('.reference-section, .gallery, .dropdown')).toHaveCount(0);
   const question = page.locator('.faq summary').first();
   await question.click();
   await expect(page.locator('.faq[open]')).toHaveCount(1);
@@ -132,12 +117,12 @@ test('a local preview cannot claim successful delivery', async ({ page }) => {
   await expect(page.getByRole('button', { name: /Send Estimate Request/ })).toBeEnabled();
 });
 
-test('pre-rendered service content works without JavaScript', async ({ browser, baseURL }) => {
+test('pre-rendered homepage and contact work without JavaScript', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto(`${baseURL}/siding/`);
-  await expect(page.locator('main h1')).toContainText('Siding that suits');
-  await expect(page.getByRole('table')).toBeVisible();
+  await page.goto(`${baseURL}/`);
+  await expect(page.locator('main h1')).toContainText('Built to Protect.');
+  await expect(page.locator('#services')).toBeVisible();
   await page.getByRole('link', { name: 'Request an Estimate', exact: true }).first().click();
   await expect(page.locator('#estimate-form')).toBeVisible();
   await context.close();

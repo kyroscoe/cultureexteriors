@@ -1,7 +1,6 @@
 import content from '../data/content.json';
 import { generalFaqs } from '../data/faqs';
 import { Button, CallToAction, Faqs, Photo } from '../components/Shared';
-import Gallery from '../components/Gallery';
 import HeroMedia from '../components/HeroMedia';
 
 export default function Home() {
@@ -42,13 +41,17 @@ export default function Home() {
               Replace worn siding. Rethink the roofline. Bring windows, trim, and gutters into the
               same plan.
             </p>
-            <a className="text-link" href="/about/">
+            <a className="text-link" href="#about">
               About Culture Homes & Exteriors ↗
             </a>
           </div>
           <div className="service-links">
             {Object.entries(content.services).map(([key, service]) => (
-              <a key={key} href={`/${key}/`}>
+              <a
+                key={key}
+                href="/contact/"
+                aria-label={`Discuss your ${service.title.toLowerCase()} project`}
+              >
                 <span className="service-name">{service.title}</span>
                 <span className="service-description">{service.short}</span>
                 <span aria-hidden="true">↗</span>
@@ -77,8 +80,8 @@ export default function Home() {
               How siding meets a window. How trim turns a corner. How the roof edge handles rain.
               Those connections deserve as much attention as the color you choose.
             </p>
-            <a className="text-link" href="/siding/#details">
-              Explore siding & trim ↗
+            <a className="text-link" href="/contact/">
+              Let’s talk about your home ↗
             </a>
             <figure className="story-landscape">
               <Photo
@@ -88,20 +91,6 @@ export default function Home() {
               <figcaption>Soffit, fascia & the roof edge.</figcaption>
             </figure>
           </div>
-        </div>
-      </section>
-      <section className="section reference-section" id="work">
-        <div className="wrap">
-          <div className="reference-head">
-            <div>
-              <span className="eyebrow">Exterior reference library</span>
-              <h2>Look closely.</h2>
-            </div>
-            <p>
-              Compare textures, profiles, and the junctions between materials for your own project.
-            </p>
-          </div>
-          <Gallery />
         </div>
       </section>
       <section className="section project-planning">
@@ -133,8 +122,8 @@ export default function Home() {
               <br />
               questions.
             </h2>
-            <a className="text-link" href="/faqs/">
-              Read all FAQs ↗
+            <a className="text-link" href="/contact/">
+              Ask us a question ↗
             </a>
           </div>
           <div>
