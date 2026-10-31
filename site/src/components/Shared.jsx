@@ -70,8 +70,8 @@ export function Logo({ lazy = false }) {
     <a className="logo" href="/" aria-label="Culture Homes & Exteriors home">
       <img
         src="/assets/culture-logo.jpeg"
-        width="898"
-        height="441"
+        width="1979"
+        height="858"
         alt="Culture Homes & Exteriors"
         loading={lazy ? 'lazy' : undefined}
       />
